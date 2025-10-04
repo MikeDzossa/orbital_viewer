@@ -1,10 +1,11 @@
 from pydantic import BaseModel
 
+
 class OrbitalElements(BaseModel):
-    a: float    # demi-grand axe (AU)
-    e: float    # excentricité
-    i: float    # inclinaison (deg)
-    raan: float # longitude noeud ascendant (deg)
-    argp: float # argument du périgée (deg)
-    M0: float   # anomalie moyenne à l'époque (deg)
+    a: float  # semi-major axis (AU)
+    e: float  # eccentricity
+    i: float  # inclination (deg)
+    raan: float  # longitude of ascending node (deg)
+    argp: float  # argument of periapsis (deg)
+    M0: float  # mean anomaly at epoch (deg)
     epoch: str  # ISO date

@@ -4,3 +4,5 @@ pydantic
 numpy
 poliastro
 astropy
+pytest
+httpx
