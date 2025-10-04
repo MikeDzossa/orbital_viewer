@@ -8,8 +8,7 @@ This project is a full-stack application for visualizing orbital trajectories in
 
 - [Prerequisites](#prerequisites)
 - [Setting Up WSL with Docker](#setting-up-wsl-with-docker)
-- [Creating an SSH Key and Adding it to GitHub](#creating-an-ssh-key-and-adding-it-to-github)
-- [Cloning the Project via SSH](#cloning-the-project-via-ssh)
+- [Forking and Cloning via HTTPS](#forking-and-cloning-via-https)
 - [Running the Project](#running-the-project)
 
 ---
@@ -77,49 +76,45 @@ Before proceeding, ensure you have the following installed on your system:
 
 ---
 
-## Creating an SSH Key and Adding it to GitHub
+## Forking and Cloning via HTTPS
 
-1. **Generate an SSH Key**:
-   In your WSL terminal, run:
+1. **Fork the Repository**:
+   - Visit the original repository in your browser (e.g., `https://github.com/ORIGINAL_OWNER/orbital_viewer`).
+   - Click **Fork** (top-right) and create your copy under your GitHub account.
 
+2. **Clone Your Fork (HTTPS)**:
+   In your WSL terminal:
    ```bash
-   ssh-keygen -t ed25519 -C "your_email@example.com"
+   git clone https://github.com/<your-username>/orbital_viewer.git
+   cd orbital_viewer
    ```
 
-   Press Enter to accept the default file location and set a passphrase if desired.
-
-2. **Add the SSH Key to the SSH Agent**:
-   Start the SSH agent and add your key:
-
+3. **Add Upstream Remote (optional but recommended)**:
    ```bash
-   eval "$(ssh-agent -s)"
-   ssh-add ~/.ssh/id_ed25519
+   git remote add upstream https://github.com/ORIGINAL_OWNER/orbital_viewer.git
+   git fetch upstream
    ```
 
-3. **Copy the SSH Key**:
-   Copy the public key to your clipboard:
-
+4. **Keep Your Fork Updated**:
    ```bash
-   cat ~/.ssh/id_ed25519.pub
+   git checkout develop   # or main depending on default branch
+   git pull upstream develop
+   git push origin develop
    ```
 
-   Copy the output.
-
-4. **Add the SSH Key to GitHub**:
-   - Go to [GitHub SSH Settings](https://github.com/settings/keys).
-   - Click **New SSH Key**.
-   - Paste the key and save.
-
----
-
-## Cloning the Project via SSH
-
-1. **Clone the Repository**:
-   In your WSL terminal, run:
+5. **Create a Feature Branch** (workflow suggestion):
    ```bash
-   git clone git@github.com:your-username/orbital-viewer.git
-   cd orbital-viewer
+   git checkout -b feature/some-improvement
+   # ...make changes...
+   git add .
+   git commit -m "feat: describe your change"
+   git push -u origin feature/some-improvement
    ```
+
+6. **Open a Pull Request**:
+   - Go to your fork on GitHub, you’ll see a banner suggesting a PR.
+   - Compare against the upstream `develop` (or `main`) branch.
+   - Fill in a clear description and submit.
 
 ---
 
@@ -132,28 +127,31 @@ Before proceeding, ensure you have the following installed on your system:
    The Dev Container will automatically install dependencies for both the backend and frontend.
 
 3. **Start the Backend**:
-   Open a terminal in the `backend` directory and run:
-
+   From the project root (recommended) run:
    ```bash
-   uvicorn app:app --reload --host 0.0.0.0 --port 8000
+   uvicorn backend.app:app --reload
    ```
 
-4. **Start the Frontend**:
-   Open a terminal in the `frontend` directory and run:
-   `bash
-    npm run dev
-    `
-   This command starts the frontend in development mode, allowing you to interact with the isolated frontend only.
+4. **Start the Frontend (development)**:
+   ```bash
+   cd frontend
+   npm install   # first time only
+   npm run dev   # serves on http://localhost:5173
+   ```
+   In dev mode the frontend calls the backend at http://localhost:8000 (adjust env vars if needed).
 
-To view the full application (frontend served by the FastAPI backend), use:
-`bash
-    npm run build
-    `
-This will serve the frontend through the backend at [http://localhost:8000](http://localhost:8000). If you still do not see the app at this address, try restarting the FastAPI server.
+5. **Serve Built Frontend via Backend**:
+   From `frontend/`:
+   ```bash
+   npm run build
+   ```
+   Then restart the backend server. The built assets under `frontend/dist` will be served at:
+   http://localhost:8000
 
-5. **Access the Application**:
-   - Frontend: Open [http://localhost:5173](http://localhost:5173).
-   - Backend: Open [http://localhost:8000/docs](http://localhost:8000/docs) for API documentation.
+6. **Access the Application**:
+   - Dev Frontend: http://localhost:5173
+   - Backend API docs: http://localhost:8000/docs
+   - Integrated (after build): http://localhost:8000
 
 ---
 
