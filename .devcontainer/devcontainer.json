@@ -21,13 +21,13 @@
         }
     },
     "mounts": [
-        "source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind,readonly,consistency=cached"
+        "source=${localEnv:HOME}/.ssh,target=/home/root/.ssh,type=bind,readonly,consistency=cached"
     ],
     "forwardPorts": [
         8000,
         5173
     ],
-    "remoteUser": "vscode",
+    "remoteUser": "root",
     "updateRemoteUserUID": true,
     "runArgs": [
         "--network=host",

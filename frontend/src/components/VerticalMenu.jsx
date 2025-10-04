@@ -3,7 +3,7 @@
 const menuStyle = {
     height: '100vh',
     width: '260px',
-    background: '#222c36',
+    background: '#222c3626',
     color: '#fff',
     display: 'flex',
     flexDirection: 'column',
@@ -21,11 +21,23 @@ const titleStyle = {
     letterSpacing: '1px',
 };
 
+// const optionStyle = {
+//     margin: '10px 0',
+//     padding: '10px 15px',
+//     width: '100%',
+//     background: '#3a4a5a',
+//     border: 'none',
+//     borderRadius: '4px',
+//     color: '#fff',
+//     cursor: 'pointer',
+//     textAlign: 'left',
+// }
+
 function VerticalMenu({ children }) {
     return (
         <nav style={menuStyle}>
             <div style={titleStyle}>Orbital Visualizer</div>
-            {children}
+            {/* {children} */}
         </nav>
     );
 }

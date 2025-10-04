@@ -6,9 +6,9 @@ RUN curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
     apt-get install -y nodejs
 
 # Ensure .ssh directory exists for vscode user
-RUN mkdir -p /home/vscode/.ssh && \
-    chown vscode:vscode /home/vscode/.ssh && \
-    chmod 700 /home/vscode/.ssh
+RUN mkdir -p /home/root/.ssh && \
+    chown root:root /home/root/.ssh && \
+    chmod 700 /home/root/.ssh
 
 # Set working directory
 WORKDIR /workspace

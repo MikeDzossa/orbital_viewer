@@ -1,0 +1,13 @@
+{
+    "[python]": {
+        "editor.tabSize": 2
+    },
+    "remote.extensionKind": {
+        "GitHub.copilot": [
+            "workspace"
+        ],
+        "GitHub.copilot-chat": [
+            "workspace"
+        ]
+    }
+}
