@@ -30,7 +30,7 @@ def mean_to_true_anomaly(M0_deg, e):
             D -= f / df
         # True anomaly: tan(nu/2) = D
         nu = 2 * np.arctan(D)
-        return np.rad2deg(nu)  # degrees
+        return np.rad2deg(nu).value  # degrees
     elif e < 1:
         # Elliptic case
         if e < 1e-10:
@@ -57,16 +57,16 @@ def mean_to_true_anomaly(M0_deg, e):
         tanh_half_H = np.tanh(H / 2)
         tan_half_nu = sqrt_arg * tanh_half_H
         nu = 2 * np.arctan(tan_half_nu)
-        return np.rad2deg(nu)  # degrees
+        return np.rad2deg(nu).value  # degrees
 
 
-def compute_orbit(elem: OrbitalElements, steps=300):
+def compute_orbit(elem: OrbitalElements, steps=1000):
     epoch = Time(elem.epoch)
     nu = mean_to_true_anomaly(elem.M0, elem.e)
     # Orbit poliastro
     orb = Orbit.from_classical(
         Sun,
-        elem.a * u.AU,
+        elem.a * u.km,
         elem.e * u.one,
         elem.i * u.deg,
         elem.raan * u.deg,

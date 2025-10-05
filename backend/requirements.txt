@@ -6,3 +6,4 @@ poliastro
 astropy
 pytest
 httpx
+astroquery
